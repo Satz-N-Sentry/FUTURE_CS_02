@@ -1,0 +1,154 @@
+================================================================
+SAMPLE: Sample 2 — Microsoft Account Phishing
+TOOL: MXToolbox + Google Admin Toolbox + URLScan + VirusTotal + AbuseIPDB + WHOIS
+DATE ANALYSED: March 2026
+================================================================
+
+SUBJECT: Microsoft account unusual signin activity
+FROM: Microsoft account team <no-reply@access-accsecurity.com>
+SENDING DOMAIN: thcultarfdes.co.uk
+SENDER IP: 89.144.44.2
+TO: phishing@pot
+DATE SENT: 26 July 2023 21:13:36 UTC
+
+----------------------------------------------------------------
+AUTHENTICATION RESULTS
+----------------------------------------------------------------
+SPF:   NONE — No SPF record on thcultarfdes.co.uk
+DKIM:  NONE — Email not digitally signed
+DMARC: PERMERROR — No DMARC record found
+RESULT: ALL THREE AUTHENTICATION CHECKS FAILED
+
+----------------------------------------------------------------
+SPAM SCORES
+----------------------------------------------------------------
+SCL: 5 — Spam Confidence Level (suspicious)
+BCL: 6 — Bulk Complaint Level (bulk sender flagged)
+X-Priority: 1 — Artificially marked HIGH importance
+X-MS-Exchange-Organization-AuthAs: Anonymous
+
+----------------------------------------------------------------
+HOP ANALYSIS
+----------------------------------------------------------------
+Hop 1: thcultarfdes.co.uk (89.144.44.2)
+       → VI1EUR05FT062.mail.protection.outlook.com
+       Not blacklisted
+
+Hop 2: VI1EUR05FT062.eop-eur05 → FR3P281CA0094.outlook.office365.com
+       Not blacklisted
+
+Hop 3: FR3P281CA0094 → MN0PR19MB6408.namprd19.prod.outlook.com
+       Not blacklisted
+
+Hop 4: MN0PR19MB6408 → MN0PR19MB6312.namprd19.prod.outlook.com
+       IS ON A BLACKLIST — confirmed malicious server
+
+----------------------------------------------------------------
+KEY HEADERS FOUND
+----------------------------------------------------------------
+Authentication-Results:
+  spf=none (sender IP is 89.144.44.2)
+  dkim=none (message not signed)
+  dmarc=permerror action=none
+
+Return-Path: bounce@thcultarfdes.co.uk
+  — Different from From address — confirms spoofing
+
+Reply-To: solutionteamrecognizd02@gmail.com
+  — ALL links in email body go to attacker Gmail
+  — Victim thinks they contact Microsoft, emails attacker
+
+X-Sender-IP: 89.144.44.2
+  — Warsaw, Poland — Microsoft is a US company
+
+X-Priority: 1 / Importance: high
+  — Manually set by attacker to create urgency
+
+TRACKING PIXEL FOUND IN BODY:
+  http://thebandalisty.com/track/o39376LnAvM22448528iLzn49413kiy33632IcpF176
+  — Invisible 1x1 pixel — loads silently on email open
+  — Reports victim identity, time, IP, email client to attacker
+
+----------------------------------------------------------------
+ABUSEIPDB — IP: 89.144.44.2
+----------------------------------------------------------------
+Status: Not in abuse database
+ISP: MSCode.pl
+Usage Type: Data Center/Web Hosting/Transit
+Location: Warsaw, Poland
+ASN: Unknown
+Finding: Polish data centre IP
+         Microsoft never sends from Polish data centres
+         Unknown ASN — cheap anonymous VPS
+
+----------------------------------------------------------------
+WHOIS — access-accsecurity.com (From address domain)
+----------------------------------------------------------------
+Status: Domain NOT registered
+Available to purchase for $13.48
+Finding: From address uses completely unregistered domain
+         Attacker created fake Microsoft display name
+         using a domain that does not even exist
+         No legitimate company sends from unregistered domains
+
+----------------------------------------------------------------
+VIRUSTOTAL — thebandalisty.com (Tracking pixel domain)
+----------------------------------------------------------------
+Detection: 6/98 security vendors flagged as MALICIOUS
+Community Score: -78 (widely known as malicious)
+Flagged by:
+  alphaMountain.ai  — Phishing
+  BitDefender       — Phishing
+  CyRadar           — Malicious
+  Fortinet          — Phishing
+  G-Data            — Phishing
+  Sophos            — Phishing
+Finding: Tracking pixel domain confirmed malicious by
+         6 major enterprise security vendors
+
+----------------------------------------------------------------
+URLSCAN — thebandalisty.com (Tracking pixel domain)
+----------------------------------------------------------------
+Total scans recorded: 731
+Page size per scan: 98-146 KB
+IPs connected per scan: 12
+URL pattern: /track/[unique victim ID][campaign codes]
+Country: United States hosting
+Age: 1-2 years ago (matches attack date July 2023)
+
+Finding: 731 URLScan records confirms large-scale
+         professional phishing campaign.
+         Each victim received a unique tracking URL —
+         attacker had real-time analytics on every open,
+         click, time, and IP address.
+         98-146KB page size = full phishing page loaded,
+         not just a tracking pixel.
+         12 IPs per scan = distributed malicious infrastructure.
+         This was a mass campaign targeting hundreds
+         or thousands of recipients simultaneously.
+
+----------------------------------------------------------------
+PHISHING INDICATORS — COMPLETE LIST
+----------------------------------------------------------------
+1.  Fake Microsoft domain — access-accsecurity.com not registered
+2.  Sending domain thcultarfdes.co.uk — no SPF/DKIM/DMARC
+3.  ALL authentication checks FAILED
+4.  Reply-To is attacker Gmail — victim contacts attacker directly
+5.  All action buttons send victim data to attacker Gmail
+6.  Fake Russia/Moscow login details — designed to create fear
+7.  Hidden tracking pixel — thebandalisty.com — 6 vendors confirmed
+8.  731 URLScan records — large scale professional campaign
+9.  Unique per-victim tracking codes — individual victim analytics
+10. Hop 4 server IS ON A BLACKLIST
+11. BCL 6 — confirmed bulk phishing campaign
+12. X-Priority: 1 — fake urgency header
+13. Sending IP in Poland — Microsoft is US-based
+14. 12 IPs per URLScan — distributed infrastructure
+15. Community score -78 on VirusTotal — widely known malicious
+
+----------------------------------------------------------------
+CLASSIFICATION: CONFIRMED PHISHING
+ATTACK TYPE: Microsoft Account Impersonation — Mass Campaign
+SCALE: Hundreds to thousands of victims targeted
+ATTACKER STATUS: Unknown — not apprehended
+================================================================

@@ -1,0 +1,245 @@
+================================================================
+SAMPLE: Sample 3 — XRP Ripple Cryptocurrency Scam
+TOOL: MXToolbox + Google Admin Toolbox + URLScan + VirusTotal
+      + AbuseIPDB + WHOIS
+DATE ANALYSED: March 2026
+================================================================
+
+SUBJECT: More benefits from Ripple with the Allocation Program
+FROM: CoinDesk <coindesk@mg.areafellowship.com>
+REAL COINDESK DOMAIN: coindesk.com
+SENDING DOMAIN: mg.areafellowship.com (compromised church subdomain)
+PHISHING DOMAIN: mail123-ripple.net (all links go here)
+SENDING IP: 198.61.254.55 (Mailgun Technologies Inc)
+TO: phishing@pot
+DATE SENT: 27 July 2023 15:06:03 UTC
+
+----------------------------------------------------------------
+AUTHENTICATION RESULTS
+----------------------------------------------------------------
+SPF:   PASS — Mailgun server authorised for mg.areafellowship.com
+DKIM:  PASS — Signed by mg.areafellowship.com via Mailgun
+DMARC: bestguesspass — No DMARC record found for domain
+RESULT: SPF and DKIM PASS — legitimate service abuse
+        Attacker used Mailgun + compromised church subdomain
+        to bypass all email authentication checks
+
+----------------------------------------------------------------
+SPAM SCORES
+----------------------------------------------------------------
+SCL: 9 — MAXIMUM spam confidence score
+BCL: 0 — Not flagged as bulk (Mailgun reputation protected)
+dest: J — Delivered to Junk folder
+OFR: SpamFilterAuthJ — Spam filter flagged as junk
+Delivered in: 7 seconds — automated sender
+
+KEY INSIGHT: SCL=9 is Microsoft's MAXIMUM spam score
+             Email was still DELIVERED because SPF+DKIM passed
+             Authentication reputation overrode spam score
+
+----------------------------------------------------------------
+HOP ANALYSIS
+----------------------------------------------------------------
+Hop 0: <unknown> (origin completely hidden)
+       → 47a34c698db9 (internal Mailgun node)
+       No delay — origin server identity hidden by attacker
+
+Hop 1: 5 sec delay
+       so254-55.mailgun.net (198.61.254.55)
+       → HE1EUR04FT028.mail.protection.outlook.com
+       5 second delay — email left Mailgun, entered Microsoft
+
+Hop 2: 0 seconds
+       HE1EUR04FT028.eop-eur04 → OS6P279CA0157.outlook.office365.com
+       Normal Microsoft internal routing
+
+Hop 3: 1 second
+       OS6P279CA0157 → DM6PR19MB4214.namprd19.prod.outlook.com
+       Routing through Microsoft datacentre
+
+Hop 4: 1 second
+       DM6PR19MB4214 → MN0PR19MB6312.namprd19.prod.outlook.com
+       Not blacklisted
+
+Hop 5: IS ON A BLACKLIST
+       Final delivery server flagged — delivered anyway
+
+----------------------------------------------------------------
+KEY HEADERS FOUND
+----------------------------------------------------------------
+Authentication-Results:
+  spf=pass (sender IP 198.61.254.55)
+  smtp.mailfrom=mg.areafellowship.com
+  dkim=pass (signature verified)
+  dmarc=bestguesspass action=none
+  compauth=pass reason=109
+
+X-Mailgun-Sending-Ip: 198.61.254.55
+  — Confirms sent via Mailgun email service
+
+X-Mailgun-Sid: WyI5NGY2YSIsInJvZHJpZ28tZi1wQGhvdG1haWwuY29tIiwiMjBiZmZjIl0=
+  — Base64 encoded Mailgun session ID
+  — Proves attacker had active Mailgun account
+
+Sender: coindesk@mg.areafellowship.com
+  — Mailgun Sender header confirms church subdomain used
+
+Return-Path: bounce+d293ba.20bffc-phishing@pot=hotmail.com@mg.areafellowship.com
+  — Bounce path reveals Mailgun campaign structure
+  — d293ba = campaign hash, 20bffc = batch identifier
+
+X-MS-Exchange-Organization-SCL: 9
+  — Maximum spam confidence — Microsoft knew but delivered
+
+PHISHING URL FOUND IN BODY:
+  https://mail123-ripple.net/726f647269676f2d662d7040686f746d61696c2e636f6d
+  ?c_id=coindesk-27bc8277-ccf1-41fd-bb5b-1281a7728da9
+  — Hex decoded victim email in URL path
+  — c_id = campaign ID for tracking
+  — ALL links in email go to this domain
+
+TRACKING PIXEL IN BODY:
+  https://mail123-ripple.net/[hex encoded email].gif
+  — Loads silently on email open
+  — Reports open time, IP, email client to attacker
+
+FAKE JOURNALIST NAME:
+  Daniel Kuhn — real CoinDesk journalist named in body
+  Used without permission to add credibility
+
+SOCIAL ENGINEERING BAIT:
+  Real Ripple/XRP court ruling of July 13 2023 referenced
+  Promises 15% initial balance boost
+  Promises 30% balance boost for early adopters
+
+----------------------------------------------------------------
+GOOGLE ADMIN TOOLBOX ANALYSIS
+----------------------------------------------------------------
+MessageID: 20230727150603.c2011bfd5c8933f6@mg.areafellowship.com
+Created at: 7/27/2023 8:06:03 PM GMT+5
+Delivered after: 5 seconds
+
+SPF:   PASS with IP Unknown
+DKIM:  PASS with domain Unknown
+DMARC: bestguesspass
+
+HOP TIMELINE:
+Hop 0 — No delay — <unknown> → 47a34c698db9
+         ORIGIN COMPLETELY HIDDEN by attacker
+Hop 1 — 5 sec — Mailgun → Microsoft EOP
+         Email left Mailgun infrastructure
+Hop 2+ — Standard Microsoft internal routing
+
+----------------------------------------------------------------
+ABUSEIPDB — IP: 198.61.254.55
+----------------------------------------------------------------
+Status: Found in database
+Reports: 22 abuse reports filed
+Confidence of Abuse: 0%
+ISP: Mailgun Technologies Inc
+Usage Type: Data Center/Web Hosting/Transit
+ASN: AS19994
+Domain: mailgun.com
+Location: Chicago, Illinois, USA
+
+Finding: 22 abuse reports against this Mailgun IP
+         0% confidence = reports not verified as malicious
+         Mailgun's good reputation kept confidence score low
+         This is how legitimate services get abused at scale
+
+----------------------------------------------------------------
+WHOIS — mail123-ripple.net (Phishing domain)
+----------------------------------------------------------------
+Status: Domain NOT currently registered
+Available to purchase for $14.88
+Finding: Domain was registered for the attack campaign
+         then dropped after being reported/blacklisted
+         NICENIC International used as registrar
+         (Chinese throwaway registrar — minimal verification)
+
+----------------------------------------------------------------
+URLSCAN — mail123-ripple.net
+----------------------------------------------------------------
+Total scans found: 3
+Ages: 2 years and 3 years old
+Server location: RUSSIA confirmed via country flag
+Finding: Phishing site hosted on Russian server
+         Chosen for anonymous hosting and slow international
+         takedown response from US/EU law enforcement
+         3 historical scans confirm domain was active
+         during the July 2023 attack campaign
+
+----------------------------------------------------------------
+VIRUSTOTAL — mail123-ripple.net
+----------------------------------------------------------------
+Current detection: 0/94 (domain now inactive/parked)
+Registrar: NICENIC INTERNATIONAL GROUP CO., LIMITED
+Creation Date: 2 years ago (matches July 2023 attack)
+Last Analysis: 24 days ago
+Unrated: alphaMountain.ai
+
+Finding: Chinese throwaway registrar NICENIC used
+         Domain created specifically for this campaign
+         0 detections now because site is inactive
+         Tools detect live pages — dead sites score clean
+
+----------------------------------------------------------------
+VIRUSTOTAL — areafellowship.com (Compromised church domain)
+----------------------------------------------------------------
+Detection: 0/92 — Not flagged
+Status: 200 OK — real website exists
+Content: text/html
+Last Analysis: 3 years ago
+
+Finding: areafellowship.com is a REAL church website
+         Attacker registered mg. subdomain via Mailgun
+         using the church domain without authorisation
+         Clean reputation of church domain exploited
+         to bypass spam filters
+
+----------------------------------------------------------------
+PHISHING INDICATORS — COMPLETE LIST
+----------------------------------------------------------------
+1.  CoinDesk impersonation — real domain is coindesk.com
+2.  Sending via compromised church subdomain mg.areafellowship.com
+3.  Origin server completely hidden (Hop 0 = unknown)
+4.  SCL: 9 — Microsoft's maximum spam score
+5.  Hop 5 IS ON A BLACKLIST
+6.  ALL links redirect to mail123-ripple.net (Russian server)
+7.  Victim email hex-encoded in URL — individual tracking
+8.  Hidden tracking pixel in email body
+9.  NICENIC Chinese throwaway registrar used
+10. Russian server hosting — chosen for anonymity
+11. Real journalist name (Daniel Kuhn) used without permission
+12. Real court ruling (July 13 2023) used as social bait
+13. Unrealistic financial promises (15-30% bonus)
+14. 22 Mailgun IP abuse reports
+15. DMARC: bestguesspass — no real record on church domain
+16. Return-Path reveals Mailgun campaign structure
+17. Fake wallet program designed to drain crypto assets
+18. No legitimate token program uses email link wallet connection
+
+----------------------------------------------------------------
+ATTACK FLOW SUMMARY
+----------------------------------------------------------------
+Step 1: Attacker reads news of Ripple court win July 13
+Step 2: Registers mail123-ripple.net via NICENIC ($15)
+Step 3: Hosts fake Ripple website on Russian server
+Step 4: Creates Mailgun account using mg.areafellowship.com
+Step 5: Sends fake CoinDesk newsletter to thousands of victims
+Step 6: Victim clicks link in email — goes to Russian server
+Step 7: Victim connects crypto wallet to fake Ripple site
+Step 8: Victim approves transaction — ALL crypto transferred
+Step 9: Blockchain transaction executes — irreversible
+Step 10: Attacker drops domain — disappears — $15 total cost
+
+----------------------------------------------------------------
+CLASSIFICATION: CONFIRMED PHISHING
+ATTACK TYPE: Cryptocurrency Investment Scam — Wallet Drain
+TECHNIQUE: Mailgun abuse + compromised subdomain + fake website
+BAIT: Real XRP court ruling + fake token allocation program
+INFRASTRUCTURE: Russian server + Chinese registrar
+SCALE: Individual victim tracking via hex-encoded URLs
+REVERSIBILITY: Blockchain transactions — IRREVERSIBLE
+ATTACKER STATUS: Unknown — not apprehended
+================================================================

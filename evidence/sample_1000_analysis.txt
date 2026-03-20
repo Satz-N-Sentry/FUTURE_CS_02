@@ -1,0 +1,165 @@
+================================================================
+SAMPLE: Sample 1 — Brazilian Tax Refund Scam
+TOOL: MXToolbox + Google Admin Toolbox
+DATE ANALYSED: March 2026
+================================================================
+
+SUBJECT: Liberação de IRPF - 6NwlyfzWcsNerv0
+FROM: [BB] - Seu saldo foi liberado - Código: 11084339647130851921
+      <prestonconstance587@gmail.com>
+TO: phishing@pot
+DATE SENT: 26 July 2023 17:59:01 UTC
+LANGUAGE: Portuguese (Brazilian)
+
+----------------------------------------------------------------
+AUTHENTICATION RESULTS
+----------------------------------------------------------------
+SPF:   PASS — Email sent from legitimate Gmail server
+DKIM:  PASS — Gmail signature verified
+DMARC: PASS — policy=none (not enforced — weakness)
+RESULT: ALL PASS — but this is LEGITIMATE SERVICE ABUSE
+        Attacker used real Gmail to bypass spam filters
+        Authentication passing does NOT mean email is safe
+
+----------------------------------------------------------------
+SPAM SCORES
+----------------------------------------------------------------
+SCL: 1 — Low spam confidence (Gmail reputation protected it)
+BCL: 0 — Not flagged as bulk
+Delivered in: 6 seconds — automated bulk sender confirmed
+X-MS-Exchange-Organization-AuthAs: Anonymous
+
+----------------------------------------------------------------
+HOP ANALYSIS
+----------------------------------------------------------------
+Hop 0: a3.domain (attacker device)
+       → smtp.gmail.com
+       3 second delay — attacker sends to Gmail
+
+Hop 1: Internal Gmail routing
+       → IPv6 2002:ac8:5c83:0:b0:403:ec6d:4e46
+       0 seconds — normal internal routing
+
+Hop 2: [Google] mail routing
+       → mail-qt1-f178.google.com
+       1 second — still inside Google network
+
+Hop 3: mail-qt1-f178.google.com (209.85.160.178)
+       → MW2NAM04FT023.eop-NAM04.prod.protection.outlook.com
+       0 seconds — LEFT Google, entered Microsoft
+       IS ON A BLACKLIST — flagged but still delivered
+
+Hop 4: MW2NAM04FT023 → MN0PR19MB6312
+       2 second delay — Microsoft internal routing to mailbox
+
+----------------------------------------------------------------
+KEY HEADERS FOUND
+----------------------------------------------------------------
+Authentication-Results:
+  spf=pass (sender IP 209.85.160.178)
+  smtp.mailfrom=gmail.com
+  dkim=pass (signature was verified)
+  dmarc=pass action=none
+  compauth=pass reason=100
+
+Return-Path: prestonconstance587@gmail.com
+  — Matches From address — confirms Gmail abuse (not spoofed)
+
+X-Sender-IP: 209.85.160.178
+  — Google's mail server — confirms sent through Gmail
+
+X-MS-Exchange-Organization-SCL: 1
+  — Microsoft gave LOW spam score
+  — Gmail's good reputation caused this to slip through
+
+X-Microsoft-Antispam: BCL:0
+  — Not flagged as bulk mail
+  — Gmail's reputation protected the phishing email
+
+CAMPAIGN TRACKING CODE IN SUBJECT:
+  6NwlyfzWcsNerv0 — unique campaign identifier
+  Attacker tracked open rates across all victims
+
+DMARC POLICY:
+  v=DMARC1; p=none
+  — Policy is NONE — no enforcement
+  — Emails that fail DMARC are NOT blocked, only monitored
+  — This is a Gmail domain weakness exploited by attacker
+
+ATTACHMENT:
+  Content-Type: multipart/mixed
+  — Email contains an attachment
+  — Likely malware designed to steal banking credentials
+    and CPF (Brazilian national ID) numbers
+
+----------------------------------------------------------------
+GOOGLE ADMIN TOOLBOX ANALYSIS
+----------------------------------------------------------------
+MessageID: fe5a59263be048e994229d8d1b31df82@gmail.com
+Created at: 7/26/2023 10:59:01 PM GMT+5
+Delivered after: 6 seconds (automated bulk sender)
+
+SPF:   PASS with IP Unknown
+DKIM:  PASS with domain Unknown
+DMARC: PASS
+
+HOP TIMELINE:
+Hop 0 — 3 sec  — a3.domain → smtp.gmail.com
+         Attacker device → Gmail SMTP server
+Hop 1 — 0 sec  — Internal Gmail IPv6 routing
+Hop 2 — 1 sec  — [Google] → mail-qt1-f178.google.com
+         Still inside Google network
+Hop 3 — 0 sec  — MW2NAM04FT023.eop-NAM04 → MW4PR03CA0311
+         Left Google, entered Microsoft EOP — BLACKLISTED HERE
+Hop 4 — 2 sec  — PH7PR19MB6592 → MN0PR19MB6312
+         Microsoft internal routing to victim mailbox
+
+KEY FINDING:
+Email originated from unknown attacker device (a3.domain)
+Routed through Gmail to exploit authentication reputation
+Blacklisted at Microsoft EOP Hop 3
+Successfully delivered to victim mailbox despite blacklist
+
+----------------------------------------------------------------
+PHISHING INDICATORS — COMPLETE LIST
+----------------------------------------------------------------
+1.  Free Gmail account used — prestonconstance587@gmail.com
+2.  Brazilian tax authority (Receita Federal) NEVER uses Gmail
+3.  Random campaign tracking code in subject: 6NwlyfzWcsNerv0
+4.  Fake bank display name in From field: [BB] - Seu saldo foi liberado
+5.  Fake protocol number in body: 4793122145117905827
+6.  Attachment present — multipart/mixed content type
+7.  Delivered in 6 seconds — automated bulk campaign
+8.  Hop 3 server IS ON A BLACKLIST
+9.  DMARC policy=none — Gmail domain not protected
+10. Generic greeting — Clientephishing@pot (not personalised)
+11. Origin from a3.domain — unidentifiable attacker device
+12. Portuguese language — targets Brazilian citizens specifically
+13. Times to tax refund season — July annual IRPF release
+14. Fake bank name in display: Banco do Brasil implied
+
+----------------------------------------------------------------
+WHOIS / DOMAIN CHECK
+----------------------------------------------------------------
+Domain: gmail.com
+Status: Legitimate Google domain
+Finding: No point checking — attacker used real Gmail
+         This is service abuse, not domain spoofing
+
+----------------------------------------------------------------
+ABUSEIPDB
+----------------------------------------------------------------
+IP: 209.85.160.178
+Owner: Google LLC
+Finding: Clean — Google's own mail server
+         Phishing delivered through legitimate infrastructure
+         This is why it bypassed security controls
+
+----------------------------------------------------------------
+CLASSIFICATION: CONFIRMED PHISHING
+ATTACK TYPE: Tax Refund Scam — Legitimate Email Service Abuse
+TECHNIQUE: Gmail abuse to pass SPF/DKIM/DMARC checks
+LANGUAGE: Portuguese — Targets Brazilian citizens
+SCALE: Automated bulk campaign (6 second delivery, tracking code)
+ATTACKER STATUS: Unknown — not apprehended
+================================================================
