@@ -193,6 +193,6 @@ FUTURE_CS_02/
 
 **Satheesh Nithiananthan** (CyberLycan)
 SAIZERO — Ground Zero Defence
-Future Interns Cybersecurity Internship 2026
+
 
 *Every shadow has a hunter* 🐺
