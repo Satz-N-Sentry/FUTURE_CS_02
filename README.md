@@ -7,7 +7,7 @@
 ## Overview
 
 This repository contains a professional phishing email detection and awareness
-analysis conducted as part of the Future Interns Cybersecurity Internship 2026.
+analysis.
 
 Three real-world phishing email samples were collected from public honeypot
 repositories and analysed using multiple industry-standard tools to identify
@@ -19,8 +19,7 @@ used by threat actors.
 ## Target Organisation
 
 This analysis was conducted using a simulated client profile
-(Pinnacle Capital Group LLC) for training purposes as part of
-the Future Interns Cybersecurity Internship 2026. The phishing
+(Pinnacle Capital Group LLC) for training purposes only. The phishing
 email samples analysed are real samples collected from public
 honeypot repositories.
 
